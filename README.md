@@ -16,7 +16,54 @@ gem install type_fusion
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require "type_fusion"
+```
+
+#### Type sample inside a block
+
+```ruby
+TypeFusion::Sampler.instance.with_sampling do
+  # run code you want to type sample here
+end
+```
+
+#### Type sample globally
+
+```ruby
+TypeFusion::Sampler.instance.trace.enable
+
+# run code you want to type sample here
+
+TypeFusion::Sampler.instance.trace.disable
+```
+
+#### Retrieve the samples
+
+```ruby
+TypeFusion::Sampler.instance.trace.samples
+# => [...]
+```
+
+```ruby
+TypeFusion::Sampler.instance.trace.samples.first
+
+# => #<struct TypeFusion::SampleCall
+#      gem_and_version="nokogiri-1.15.4-x86_64-darwin",
+#      receiver="Nokogiri",
+#      method_name=:parse,
+#      location=[
+#        "/Users/marcoroth/.anyenv/envs/rbenv/versions/3.2.2/lib/ruby/gems/3.2.0/gems/nokogiri-1.15.4-x86_64-darwin/lib/nokogiri.rb",
+#        43
+#      ],
+#      parameters=[
+#        [:string, :req, String],
+#        [:url, :opt, NilClass],
+#        [:encoding, :opt, NilClass],
+#        [:options, :opt, NilClass]
+#      ]
+#     >
+```
 
 ## Development
 
