@@ -34,8 +34,7 @@ module TypeFusion
           location = tracepoint.binding.source_location
           gem_and_version = location.first.gsub(gem_path, "").split("/").first
           args = tracepoint.parameters.map(&:reverse).to_h
-
-          parameters = args.map { |name, kind| [name, kind, type_for_object(tracepoint.binding.local_variable_get(name))] }
+          parameters = extract_parameters(args, tracepoint.binding)
 
           samples << SampleCall.new(
             gem_and_version: gem_and_version,
@@ -71,6 +70,21 @@ module TypeFusion
         ["Array", object.map { |value| type_for_object(value) }]
       else
         object.class
+      end
+    end
+
+    def extract_parameters(args, binding)
+      args.map do |name, kind|
+        variable = name.to_s.gsub("*", "").gsub("&", "").to_sym
+
+        type = if binding.local_variables.include?(variable)
+                 type_for_object(binding.local_variable_get(variable))
+               else
+                 # *, ** or &
+                 "unused"
+               end
+
+        [name, kind, type]
       end
     end
 
