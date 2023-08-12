@@ -48,6 +48,14 @@ module TypeFusion
       end.tap(&:disable)
     end
 
+    def to_s
+      inspect
+    end
+
+    def inspect
+      "#<TypeFusion::Sampler sample_count=#{@samples.count}>"
+    end
+
     def reset!
       @samples = []
       @trace = nil

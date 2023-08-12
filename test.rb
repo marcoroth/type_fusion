@@ -8,3 +8,4 @@ TypeFusion::Sampler.instance.with_sampling do
 end
 
 puts TypeFusion::Sampler.instance.samples
+puts TypeFusion::Sampler.instance.to_s
