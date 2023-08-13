@@ -31,8 +31,8 @@ module TypeFusion
           end
 
           method_name = tracepoint.method_id
-          location = tracepoint.binding.source_location
-          gem_and_version = location.first.gsub(gem_path, "").split("/").first
+          location = tracepoint.binding.source_location.join(":")
+          gem_and_version = location.gsub(gem_path, "").split("/").first
           args = tracepoint.parameters.to_h(&:reverse)
           parameters = extract_parameters(args, tracepoint.binding)
 
