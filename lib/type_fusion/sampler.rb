@@ -43,6 +43,7 @@ module TypeFusion
             receiver: receiver,
             method_name: method_name,
             location: location,
+            type_fusion_version: VERSION,
             parameters: parameters,
           )
 
