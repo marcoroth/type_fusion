@@ -5,6 +5,8 @@ module TypeFusion
     initializer "type_fusion.middleware" do |app|
       require "type_fusion/rack/middleware"
 
+      TypeFusion.config.application_name = app.class.module_parent_name
+
       app.config.middleware.use TypeFusion::Middleware
     end
   end

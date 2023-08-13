@@ -45,6 +45,7 @@ module TypeFusion
             location: location,
             type_fusion_version: VERSION,
             parameters: parameters,
+            application_name: TypeFusion.config.application_name,
           )
 
           samples << sample
