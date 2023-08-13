@@ -92,9 +92,9 @@ module TypeFusion
       splits = gem_and_version.split("-")
 
       if splits.length == 1
-        return [splits.first, nil]
+        [splits.first, nil]
       elsif splits.length == 2
-        return splits
+        splits
       else
         *name, version = splits
 
@@ -107,7 +107,7 @@ module TypeFusion
 
         gem = name.join("-")
 
-        return [gem, version]
+        [gem, version]
       end
     end
 

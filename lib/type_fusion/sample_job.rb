@@ -10,7 +10,7 @@ module TypeFusion
 
     def perform(sample)
       LHC.json.post(TypeFusion.config.endpoint, body: { sample: JSON.parse(sample) })
-    rescue => e
+    rescue StandardError => e
       puts e.inspect
     end
   end
