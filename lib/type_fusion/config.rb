@@ -11,6 +11,7 @@ module TypeFusion
 
       @config
     end
+    alias :configure :config
   end
 
   class Config
