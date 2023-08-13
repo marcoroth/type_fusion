@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
-require "litestack"
-
 module TypeFusion
   class SampleJob
     include Litejob
 
-    self.queue = :default
+    queue_as :default
 
     def perform(sample)
       puts sample.inspect

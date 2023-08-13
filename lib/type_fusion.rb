@@ -2,6 +2,7 @@
 
 require_relative "type_fusion/version"
 require_relative "type_fusion/config"
+require_relative "type_fusion/litejob"
 require_relative "type_fusion/sample_call"
 require_relative "type_fusion/sample_job"
 require_relative "type_fusion/sampler"

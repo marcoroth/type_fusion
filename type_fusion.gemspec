@@ -28,5 +28,5 @@ Gem::Specification.new do |spec|
   spec.metadata["changelog_uri"] = "#{spec.homepage}/blob/main/CHANGELOG.md"
   spec.metadata["rubygems_mfa_required"] = "true"
 
-  spec.add_dependency "litestack"
+  spec.add_dependency "litejob"
 end
