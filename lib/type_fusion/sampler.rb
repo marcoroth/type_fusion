@@ -33,11 +33,13 @@ module TypeFusion
           method_name = tracepoint.method_id
           location = tracepoint.binding.source_location.join(":")
           gem_and_version = location.gsub(gem_path, "").split("/").first
+          gem, version = gem_and_version_from(gem_and_version)
           args = tracepoint.parameters.to_h(&:reverse)
           parameters = extract_parameters(args, tracepoint.binding)
 
           sample = SampleCall.new(
-            gem_and_version: gem_and_version,
+            gem: gem,
+            gem_version: version,
             receiver: receiver,
             method_name: method_name,
             location: location,
@@ -79,6 +81,31 @@ module TypeFusion
         ["Array", object.map { |value| type_for_object(value) }]
       else
         object.class
+      end
+    end
+
+    def gem_and_version_from(gem_and_version)
+      return [] if gem_and_version.nil?
+
+      splits = gem_and_version.split("-")
+
+      if splits.length == 1
+        return [splits.first, nil]
+      elsif splits.length == 2
+        return splits
+      else
+        *name, version = splits
+
+        # TODO: there must be a better way to do this
+        if ["darwin", "java", "linux", "ucrt", "mingw32"].include?(version)
+          amount = (version == "ucrt") ? 3 : 2
+
+          version = [*name.pop(amount), version].join("-")
+        end
+
+        gem = name.join("-")
+
+        return [gem, version]
       end
     end
 
