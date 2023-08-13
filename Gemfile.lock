@@ -2,15 +2,34 @@ PATH
   remote: .
   specs:
     type_fusion (0.0.3)
+      lhc
       litejob
 
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (7.0.7)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
+    addressable (2.8.5)
+      public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
     base64 (0.1.1)
+    concurrent-ruby (1.2.2)
+    ethon (0.16.0)
+      ffi (>= 1.15.0)
+    ffi (1.15.5)
+    i18n (1.14.1)
+      concurrent-ruby (~> 1.0)
     json (2.6.3)
     language_server-protocol (3.17.0.3)
+    lhc (15.2.1)
+      activesupport (>= 5.2)
+      addressable
+      local_uri
+      typhoeus (>= 0.11)
     litedb (0.2.1)
       litescheduler (>= 0.2.0)
       sqlite3 (>= 1.5.0)
@@ -20,12 +39,17 @@ GEM
     litequeue (0.2.1)
       litedb (>= 0.2.1)
     litescheduler (0.2.1)
+    local_uri (1.2.0)
+      activesupport
+      rack
     minitest (5.19.0)
     parallel (1.23.0)
     parser (3.2.2.3)
       ast (~> 2.4.1)
       racc
+    public_suffix (5.0.3)
     racc (1.7.1)
+    rack (3.0.8)
     rainbow (3.1.1)
     rake (13.0.6)
     regexp_parser (2.8.1)
@@ -47,6 +71,10 @@ GEM
     ruby-progressbar (1.13.0)
     sqlite3 (1.6.3-x86_64-darwin)
     sqlite3 (1.6.3-x86_64-linux)
+    typhoeus (1.4.0)
+      ethon (>= 0.9.0)
+    tzinfo (2.0.6)
+      concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
 
 PLATFORMS

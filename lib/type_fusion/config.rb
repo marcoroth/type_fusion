@@ -16,12 +16,13 @@ module TypeFusion
   class Config
     include Singleton
 
-    attr_accessor :type_sample_call_rate, :type_sample_request, :type_sample_tracepoint_path
+    attr_accessor :type_sample_call_rate, :type_sample_request, :type_sample_tracepoint_path, :endpoint
 
     def initialize
       @type_sample_call_rate = 0.001
       @type_sample_request = ->(_env) { [true, false, false, false].sample }
       @type_sample_tracepoint_path = ->(_tracepoint_path) { true }
+      @endpoint = "https://gem.sh/api/v1/types/samples"
     end
 
     def type_sample_request?(env)
