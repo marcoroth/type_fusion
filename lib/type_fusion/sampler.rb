@@ -22,7 +22,7 @@ module TypeFusion
 
     def trace
       @trace ||= TracePoint.trace(:call) do |tracepoint|
-        if tracepoint.path.start_with?(gem_path)
+        if sample?(tracepoint.path)
           receiver = begin
             tracepoint.binding.receiver.name
           rescue StandardError
@@ -35,13 +35,16 @@ module TypeFusion
           args = tracepoint.parameters.map(&:reverse).to_h
           parameters = extract_parameters(args, tracepoint.binding)
 
-          samples << SampleCall.new(
+          sample = SampleCall.new(
             gem_and_version: gem_and_version,
             receiver: receiver,
             method_name: method_name,
             location: location,
             parameters: parameters,
           )
+
+          samples << sample
+          SampleJob.perform_async(sample)
         end
       end.tap(&:disable)
     end
@@ -60,6 +63,12 @@ module TypeFusion
     end
 
     private
+
+    def sample?(tracepoint_path)
+      TypeFusion.config.type_sample_call? &&
+        TypeFusion.config.type_sample_tracepoint_path?(tracepoint_path) &&
+        tracepoint_path.start_with?(gem_path)
+    end
 
     def type_for_object(object)
       case object

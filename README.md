@@ -23,7 +23,7 @@ require "type_fusion"
 #### Type sample inside a block
 
 ```ruby
-TypeFusion::Sampler.instance.with_sampling do
+TypeFusion.with_sampling do
   # run code you want to type sample here
 end
 ```
@@ -31,22 +31,22 @@ end
 #### Type sample globally
 
 ```ruby
-TypeFusion::Sampler.instance.trace.enable
+TypeFusion.start
 
 # run code you want to type sample here
 
-TypeFusion::Sampler.instance.trace.disable
+TypeFusion.stop
 ```
 
 #### Retrieve the samples
 
 ```ruby
-TypeFusion::Sampler.instance.trace.samples
+TypeFusion::Sampler.instance.samples
 # => [...]
 ```
 
 ```ruby
-TypeFusion::Sampler.instance.trace.samples.first
+TypeFusion::Sampler.instance.samples.first
 
 # => #<struct TypeFusion::SampleCall
 #      gem_and_version="nokogiri-1.15.4-x86_64-darwin",
