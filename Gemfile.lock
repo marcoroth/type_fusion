@@ -13,7 +13,7 @@ GIT
 PATH
   remote: .
   specs:
-    type_fusion (0.0.2)
+    type_fusion (0.0.3)
       litestack
 
 GEM
