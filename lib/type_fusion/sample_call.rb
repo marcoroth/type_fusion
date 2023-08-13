@@ -7,5 +7,9 @@ module TypeFusion
     def to_s
       JSON.pretty_generate(to_h)
     end
+
+    def inspect
+      "#<TypeFusion::SampleCall receiver=#{receiver.inspect} method_name=#{method_name.inspect} gem=#{gem.inspect}>"
+    end
   end
 end
