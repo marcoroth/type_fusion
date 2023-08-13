@@ -14,11 +14,72 @@ If bundler is not being used to manage dependencies, install the gem by executin
 gem install type_fusion
 ```
 
-## Usage
+#### Rack
 
 ```ruby
-require "type_fusion"
+require "type_fusion/rack/middleware"
+
+use TypeFusion::Middleware
 ```
+
+#### Rails
+
+Adding the gem to your applications Gemfile will automatically setup `type_fusion`.
+
+
+## Configuration
+
+Setup `TypeFusion` in an initializer
+
+```ruby
+# config/initializers/type_fusion.rb
+
+require "type_fusion"
+
+TypeFusion.config do |config|
+
+  # === type_sample_request
+  #
+  # Set type_sample_request to a lambda which resolves to true/false
+  # to set if type sampling should be enabled for the whole rack request.
+  #
+  # Default: ->(rack_env) { [true, false, false, false].sample }
+  #
+  # config.type_sample_request = ->(rack_env) { [true, false, false, false].sample }
+
+
+  # === type_sample_tracepoint_path
+  #
+  # Set type_sample_tracepoint_path to a lambda which resolves
+  # to true/false to check if a tracepoint_path should be sampled
+  # or not.
+  #
+  # This can be useful when you only want to sample method calls for
+  # certain gems or want to exclude a gem from being sampled.
+  #
+  # Example:
+  # config.type_sample_tracepoint_path = ->(tracepoint_path) {
+  #   # only sample calls for the Nokogiri gem
+  #   tracepoint_path.include?("nokogiri")
+  # }
+  #
+  # Default: ->(tracepoint_path) { true }
+  #
+  # config.type_sample_tracepoint_path = ->(tracepoint_path) { true }
+
+
+  # === type_sample_call_rate
+  #
+  # Set type_sample_call_rate to 1.0 to capture 100% of method calls
+  # within a rack request.
+  #
+  # Default: 0.001
+  #
+  # config.type_sample_call_rate = 0.001
+end
+```
+
+## Usage
 
 #### Type sample inside a block
 
