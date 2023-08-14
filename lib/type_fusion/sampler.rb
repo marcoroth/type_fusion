@@ -49,6 +49,7 @@ module TypeFusion
           )
 
           samples << sample
+          puts "Enqueueing sample: #{sample.inspect}"
           SampleJob.perform_async(sample)
         end
       end.tap(&:disable)
