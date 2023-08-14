@@ -23,6 +23,10 @@ module TypeFusion
 
     def trace
       @trace ||= TracePoint.trace(:call) do |tracepoint|
+        puts tracepoint.path
+        puts gem_path
+        puts "---"
+
         if sample?(tracepoint.path)
           receiver = begin
             tracepoint.binding.receiver.name
@@ -128,7 +132,7 @@ module TypeFusion
     end
 
     def gem_path
-      "#{Gem.default_path.last}/gems/"
+      Gem.default_dir
     end
   end
 end
