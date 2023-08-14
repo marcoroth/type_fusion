@@ -28,6 +28,6 @@ Gem::Specification.new do |spec|
   spec.metadata["changelog_uri"] = "#{spec.homepage}/blob/main/CHANGELOG.md"
   spec.metadata["rubygems_mfa_required"] = "true"
 
-  spec.add_dependency "lhc"
-  spec.add_dependency "litejob"
+  spec.add_dependency "lhc", "~> 15.2"
+  spec.add_dependency "litejob", "~> 0.2.3"
 end

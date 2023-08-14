@@ -2,8 +2,8 @@ PATH
   remote: .
   specs:
     type_fusion (0.0.3)
-      lhc
-      litejob
+      lhc (~> 15.2)
+      litejob (~> 0.2.3)
 
 GEM
   remote: https://rubygems.org/
@@ -33,8 +33,8 @@ GEM
     litedb (0.2.1)
       litescheduler (>= 0.2.0)
       sqlite3 (>= 1.5.0)
-    litejob (0.2.1)
-      litequeue (>= 0.2.0)
+    litejob (0.2.3)
+      litequeue (>= 0.2.1)
       litescheduler (>= 0.2.1)
     litequeue (0.2.1)
       litedb (>= 0.2.1)
