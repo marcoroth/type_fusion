@@ -1,5 +1,15 @@
 ## [Unreleased]
 
+## [0.0.4] - 2023-08-16
+
+- Implement sample collection by sending samples to gem.sh endpoint
+- Introduce Litejob to enqueue samples to be collected async
+- Updates to `SampleCall`
+  - Split up `gem_and_version` to `gem` and `version` in `SampleCall`
+  - Also collect `application_name` and `type_fusion_version` with `SampleCall`
+  - Change `Tracepoint` API from `:call` to `:return` to also collect `return_value` in `SampleCall`
+- Introduce `endpoint` and `application_name` configs
+
 ## [0.0.3] - 2023-08-13
 
 - Introduce `TypeFusion::Middleware` to allow type-sampling in Rack-powered apps

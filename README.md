@@ -38,6 +38,27 @@ require "type_fusion"
 
 TypeFusion.config do |config|
 
+  # === application_name
+  #
+  # Set application_name to a string which is used to know where the samples
+  # came from. Set application_name to an empty string if you wish to not
+  # send the application name alongside the samples.
+  #
+  # Default: "TypeFusion"
+  # Default when using Rails: Rails.application.class.module_parent_name
+  #
+  # config.application_name = "YourApplication"
+
+
+  # === endpoint
+  #
+  # Set endpoint to an URL where TypeFusion should send the samples to.
+  #
+  # Default: "https://gem.sh/api/v1/types/samples"
+  #
+  # config.endpoint = "https://your-domain.com/api/v1/types/samples"
+
+
   # === type_sample_request
   #
   # Set type_sample_request to a lambda which resolves to true/false
@@ -54,13 +75,16 @@ TypeFusion.config do |config|
   # to true/false to check if a tracepoint_path should be sampled
   # or not.
   #
-  # This can be useful when you only want to sample method calls for
+  # This can be useful when you want to only sample method calls for
   # certain gems or want to exclude a gem from being sampled.
   #
   # Example:
   # config.type_sample_tracepoint_path = ->(tracepoint_path) {
-  #   # only sample calls for the Nokogiri gem
-  #   tracepoint_path.include?("nokogiri")
+  #   return false if tracepoint_path.include?("activerecord")
+  #   return false if tracepoint_path.include?("sprockets")
+  #   return false if tracepoint_path.include?("some-private-gem")
+  #
+  #   true
   # }
   #
   # Default: ->(tracepoint_path) { true }
