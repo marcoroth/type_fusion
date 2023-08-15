@@ -22,7 +22,7 @@ module TypeFusion
     end
 
     def trace
-      @trace ||= TracePoint.trace(:call) do |tracepoint|
+      @trace ||= TracePoint.trace(:return) do |tracepoint|
         if sample?(tracepoint.path)
           receiver = begin
             tracepoint.binding.receiver.name
@@ -36,6 +36,7 @@ module TypeFusion
           gem, version = gem_and_version_from(gem_and_version)
           args = tracepoint.parameters.to_h(&:reverse)
           parameters = extract_parameters(args, tracepoint.binding)
+          return_value = type_for_object(tracepoint.return_value)
 
           sample = SampleCall.new(
             gem_name: gem,
@@ -46,6 +47,7 @@ module TypeFusion
             type_fusion_version: VERSION,
             parameters: parameters,
             application_name: TypeFusion.config.application_name,
+            return_value: return_value,
           )
 
           samples << sample

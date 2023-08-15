@@ -3,7 +3,7 @@
 require "json"
 
 module TypeFusion
-  SampleCall = Struct.new(:gem_name, :gem_version, :receiver, :method_name, :application_name, :location, :type_fusion_version, :parameters) do
+  SampleCall = Struct.new(:gem_name, :gem_version, :receiver, :method_name, :application_name, :location, :type_fusion_version, :parameters, :return_value) do
     def to_s
       JSON.pretty_generate(to_h)
     end
