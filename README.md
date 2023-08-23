@@ -134,19 +134,20 @@ TypeFusion::Sampler.instance.samples
 TypeFusion::Sampler.instance.samples.first
 
 # => #<struct TypeFusion::SampleCall
-#      gem_and_version="nokogiri-1.15.4-x86_64-darwin",
+#      gem_name="nokogiri"
+#      gem_version="1.15.4-x86_64-darwin",
 #      receiver="Nokogiri",
 #      method_name=:parse,
-#      location=[
-#        "/Users/marcoroth/.anyenv/envs/rbenv/versions/3.2.2/lib/ruby/gems/3.2.0/gems/nokogiri-1.15.4-x86_64-darwin/lib/nokogiri.rb",
-#        43
-#      ],
+#      application_name="TypeFusion",
+#      location="/Users/marcoroth/.anyenv/envs/rbenv/versions/3.2.2/lib/ruby/gems/3.2.0/gems/nokogiri-1.15.4-x86_64-darwin/lib/nokogiri.rb:43",
+#      type_fusion_version="0.0.4",
 #      parameters=[
 #        [:string, :req, String],
 #        [:url, :opt, NilClass],
 #        [:encoding, :opt, NilClass],
 #        [:options, :opt, NilClass]
-#      ]
+#      ],
+#      return_value="Nokogiri::XML::Document"
 #     >
 ```
 
