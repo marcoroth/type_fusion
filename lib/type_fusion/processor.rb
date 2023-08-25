@@ -5,10 +5,15 @@ module TypeFusion
     def initialize(amount = 4)
       @amount = amount
       @servers = []
+      @started = false
     end
 
     def should_run?
       enqueued_jobs.positive?
+    end
+
+    def started?
+      @started
     end
 
     def enqueued_jobs
@@ -20,12 +25,14 @@ module TypeFusion
         server.instance_variable_get(:@scheduler).context.kill
       end
       @servers = []
+      @started = false
     end
 
     def start!
       @amount.times do
         @servers << Litejob::Server.new
       end
+      @started = true
     end
 
     def process!

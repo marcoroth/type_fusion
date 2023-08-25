@@ -6,7 +6,6 @@ module TypeFusion
   class Middleware
     def initialize(app)
       @app = app
-      TypeFusion.start_processing
     end
 
     def call(env)
@@ -17,6 +16,8 @@ module TypeFusion
 
       @app.call(env)
     ensure
+      TypeFusion.start_processing unless TypeFusion.processor.started?
+
       TypeFusion.stop
     end
   end
