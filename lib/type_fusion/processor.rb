@@ -34,7 +34,7 @@ module TypeFusion
     end
 
     def process!
-      puts "[TypeFusion] Start processing of #{enqueued_samples} samples..."
+      puts "[TypeFusion] Start processing of #{enqueued_samples} samples using #{@amount} threads..."
 
       start!
 
