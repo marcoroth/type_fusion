@@ -6,6 +6,7 @@ module TypeFusion
   class Middleware
     def initialize(app)
       @app = app
+      TypeFusion.start_processing
     end
 
     def call(env)

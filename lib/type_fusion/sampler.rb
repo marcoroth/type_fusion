@@ -10,7 +10,6 @@ module TypeFusion
 
     def initialize
       @samples = []
-      @litejob_server ||= Litejob::Server.new([["default", 1]])
     end
 
     def with_sampling
