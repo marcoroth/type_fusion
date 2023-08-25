@@ -27,6 +27,24 @@ use TypeFusion::Middleware
 Adding the gem to your applications Gemfile will automatically setup `type_fusion`.
 
 
+#### Minitest
+
+If you only want to run TypeFusion in your test environment you can require `type_fusion/minitest` in your `test_helper.rb`:
+
+```diff
+# test/test_helper.rb
+
+ENV["RAILS_ENV"] ||= "test"
+require_relative "../config/environment"
+require "rails/test_help"
+
++require "type_fusion/minitest"
+
+class ActiveSupport::TestCase
+  # ...
+end
+```
+
 ## Configuration
 
 Setup `TypeFusion` in an initializer
