@@ -50,7 +50,12 @@ module TypeFusion
           )
 
           samples << sample
-          SampleJob.perform_async(sample)
+
+          begin
+            SampleJob.perform_async(sample)
+          rescue StandardError => e
+            puts "[TypeFusion] Couldn't enqueue sample: #{e.inspect}"
+          end
         end
       end.tap(&:disable)
     end
