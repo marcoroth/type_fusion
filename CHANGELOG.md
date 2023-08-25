@@ -1,5 +1,12 @@
 ## [Unreleased]
 
+## [0.0.5] - 2023-08-25
+
+- Introduce `TypeFusion::Processor` for processing samples
+- Add support for running TypeFusion in the test environment with Minitest
+- Rescue and log when job failed to enqueue
+- Add Rake task for manually processing enqueued jobs
+
 ## [0.0.4] - 2023-08-16
 
 - Implement sample collection by sending samples to gem.sh endpoint
