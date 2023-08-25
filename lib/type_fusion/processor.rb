@@ -42,7 +42,7 @@ module TypeFusion
         puts "\n[TypeFusion] Stop processing of TypeFusion samples..."
         stop!
       end
-      
+
       start!
 
       while should_run?
