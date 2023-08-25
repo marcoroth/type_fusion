@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    type_fusion (0.0.5)
+    type_fusion (0.0.6)
       lhc (~> 15.2)
       litejob (~> 0.2.3)
 

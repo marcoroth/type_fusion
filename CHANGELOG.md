@@ -1,4 +1,11 @@
-## [Unreleased]
+## [0.0.6] - 2023-08-25
+
+- Add support for running TypeFusion in the test environment with RSpec
+- Update Struct syntax for Ruby 3.2/3.1 compatibility
+- Show how many threads are processing samples
+- Rename `TypeFusion::Processor#enqueued_samples` to `#enqueued_jobs`
+- Move `TypeFusion::Processor` signal trap to `#process!` so it doesn't interfere with the Rails server
+- Keep track of started state of `TypeFusion::Processor` so we only need to start the processing once
 
 ## [0.0.5] - 2023-08-25
 
