@@ -14,22 +14,13 @@ If bundler is not being used to manage dependencies, install the gem by executin
 gem install type_fusion
 ```
 
-#### Rack
+### Running TypeFusion in the `test` environment
 
-```ruby
-require "type_fusion/rack/middleware"
-
-use TypeFusion::Middleware
-```
-
-#### Rails
-
-Adding the gem to your applications Gemfile will automatically setup `type_fusion`.
-
+Setup TypeFusion if you only want to run TypeFusion as part of your test suite.
 
 #### Minitest
 
-If you only want to run TypeFusion in your test environment you can require `type_fusion/minitest` in your `test_helper.rb`:
+You can require `type_fusion/minitest` in your `test_helper.rb`:
 
 ```diff
 # test/test_helper.rb
@@ -44,6 +35,36 @@ class ActiveSupport::TestCase
   # ...
 end
 ```
+
+#### RSpec
+
+You can require `type_fusion/rspec` in your `spec_helper.rb`:
+
+```diff
+# spec/spec_helper.rb
+
++require "type_fusion/rspec"
+
+RSpec.configure do |config|
+  # ...
+end
+```
+
+### Running TypeFusion in `development` or `production`
+
+#### Rack
+
+```ruby
+require "type_fusion/rack/middleware"
+
+use TypeFusion::Middleware
+```
+
+#### Rails
+
+Adding the gem to your applications Gemfile will automatically setup `type_fusion`.
+
+
 
 ## Configuration
 
