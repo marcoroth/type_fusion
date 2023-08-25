@@ -16,9 +16,9 @@ module TypeFusion
     end
 
     def stop!
-      @servers.each { |server|
+      @servers.each do |server|
         server.instance_variable_get(:@scheduler).context.kill
-      }
+      end
       @servers = []
     end
 
