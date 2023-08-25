@@ -8,10 +8,10 @@ module TypeFusion
     end
 
     def should_run?
-      enqueued_samples.positive?
+      enqueued_jobs.positive?
     end
 
-    def enqueued_samples
+    def enqueued_jobs
       Litequeue.instance.count
     end
 
@@ -34,7 +34,7 @@ module TypeFusion
     end
 
     def process!
-      puts "[TypeFusion] Start processing of #{enqueued_samples} samples using #{@amount} threads..."
+      puts "[TypeFusion] Start processing of #{enqueued_jobs} samples using #{@amount} threads..."
 
       start!
 
