@@ -37,7 +37,7 @@ module TypeFusion
           parameters = extract_parameters(args, tracepoint.binding)
           return_value = type_for_object(tracepoint.return_value)
 
-          sample = SampleCall.new({
+          sample_values = {
             gem_name: gem,
             gem_version: version,
             receiver: receiver,
@@ -47,7 +47,9 @@ module TypeFusion
             parameters: parameters,
             application_name: TypeFusion.config.application_name,
             return_value: return_value,
-          })
+          }
+
+          sample = SampleCall.new(sample_values.values)
 
           samples << sample
 
