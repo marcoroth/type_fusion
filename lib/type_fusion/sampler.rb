@@ -42,10 +42,10 @@ module TypeFusion
             gem_version: version,
             receiver: receiver,
             method_name: method_name,
+            application_name: TypeFusion.config.application_name,
             location: location,
             type_fusion_version: VERSION,
             parameters: parameters,
-            application_name: TypeFusion.config.application_name,
             return_value: return_value,
           }
 
