@@ -23,11 +23,6 @@ module TypeFusion
     end
 
     def start!
-      Signal.trap("INT") do
-        puts "\n[TypeFusion] Stop processing of TypeFusion samples..."
-        stop!
-      end
-
       @amount.times do
         @servers << Litejob::Server.new
       end
@@ -36,6 +31,11 @@ module TypeFusion
     def process!
       puts "[TypeFusion] Start processing of #{enqueued_jobs} samples using #{@amount} threads..."
 
+      Signal.trap("INT") do
+        puts "\n[TypeFusion] Stop processing of TypeFusion samples..."
+        stop!
+      end
+      
       start!
 
       while should_run?
