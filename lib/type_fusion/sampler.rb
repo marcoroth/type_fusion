@@ -31,11 +31,17 @@ module TypeFusion
 
           method_name = tracepoint.method_id
           location = tracepoint.binding.source_location.join(":")
-          gem_and_version = location.gsub(gem_path, "").split("/").first
-          gem, version = gem_and_version_from(gem_and_version)
           args = tracepoint.parameters.to_h(&:reverse)
           parameters = extract_parameters(args, tracepoint.binding)
           return_value = type_for_object(tracepoint.return_value)
+
+          if TypeFusion.config.gem_mode
+            # TODO: make this dynamic
+            gem, version = "countries", "5.6.0"
+          else
+            gem_and_version = location.gsub(gem_path, "").split("/").first
+            gem, version = gem_and_version_from(gem_and_version)
+          end
 
           sample_values = {
             gem_name: gem,
@@ -80,7 +86,7 @@ module TypeFusion
     def sample?(tracepoint_path)
       TypeFusion.config.type_sample_call? &&
         TypeFusion.config.type_sample_tracepoint_path?(tracepoint_path) &&
-        tracepoint_path.start_with?(gem_path)
+        (tracepoint_path.start_with?(gem_path) || TypeFusion.config.gem_mode)
     end
 
     def type_for_object(object)
