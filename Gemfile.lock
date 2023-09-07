@@ -42,7 +42,7 @@ GEM
     local_uri (1.2.0)
       activesupport
       rack
-    minitest (5.19.0)
+    minitest (5.20.0)
     parallel (1.23.0)
     parser (3.2.2.3)
       ast (~> 2.4.1)
@@ -82,7 +82,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  minitest (~> 5.0)
+  minitest (~> 5.20)
   rake (~> 13.0)
   rubocop (~> 1.56)
   type_fusion!
