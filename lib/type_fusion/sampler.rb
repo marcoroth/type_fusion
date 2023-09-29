@@ -31,11 +31,15 @@ module TypeFusion
 
           method_name = tracepoint.method_id
           location = tracepoint.binding.source_location.join(":")
-          gem_and_version = location.gsub(gem_path, "").split("/").first
-          gem, version = gem_and_version_from(gem_and_version)
           args = tracepoint.parameters.to_h(&:reverse)
           parameters = extract_parameters(args, tracepoint.binding)
           return_value = type_for_object(tracepoint.return_value)
+
+          if TypeFusion.config.gem_mode
+            gem, version = gem_and_version_from_disk(location)
+          else
+            gem, version = gem_and_version_from_binding(location)
+          end
 
           sample_values = {
             gem_name: gem,
@@ -80,7 +84,7 @@ module TypeFusion
     def sample?(tracepoint_path)
       TypeFusion.config.type_sample_call? &&
         TypeFusion.config.type_sample_tracepoint_path?(tracepoint_path) &&
-        tracepoint_path.start_with?(gem_path)
+        (tracepoint_path.start_with?(gem_path) || TypeFusion.config.gem_mode)
     end
 
     def type_for_object(object)
@@ -94,7 +98,9 @@ module TypeFusion
       end
     end
 
-    def gem_and_version_from(gem_and_version)
+    def gem_and_version_from_binding(location)
+      gem_and_version = location.gsub(gem_path, "").split("/").first
+
       return [] if gem_and_version.nil?
 
       splits = gem_and_version.split("-")
@@ -116,6 +122,39 @@ module TypeFusion
         gem = name.join("-")
 
         [gem, version]
+      end
+    end
+
+    def gem_and_version_from_disk(location)
+      parts = location.split(":").first.split("/")
+
+      start_pos = 0
+      end_pos = parts.length - 1
+
+      parts.each_with_index do |file, index|
+        end_pos -= 1
+        path = parts[start_pos..end_pos]
+
+        gemspecs = Dir.glob((path + ["*.gemspec"]).join("/"))
+
+        if gemspecs.any?
+          root_path = path.join("/")
+
+          gemspec = gemspecs.first
+          gem_name = gemspec.split("/").last.split(".").first
+
+          version_file_path = root_path + "/lib/#{gem_name}/version.rb"
+          version_regex = /VERSION\s+=\s+['"](.+)['"]/
+
+          if File.exist?(version_file_path)
+            version_file = File.read(version_file_path)
+            version = version_file.scan(version_regex).flatten.first
+
+            return [gem_name, version]
+          end
+
+          return [gem_name, nil]
+        end
       end
     end
 
