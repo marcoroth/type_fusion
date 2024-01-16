@@ -42,8 +42,8 @@ GEM
       activesupport
       rack
     minitest (5.21.1)
-    parallel (1.23.0)
-    parser (3.2.2.4)
+    parallel (1.24.0)
+    parser (3.3.0.4)
       ast (~> 2.4.1)
       racc
     public_suffix (5.0.3)
@@ -51,13 +51,13 @@ GEM
     rack (3.0.8)
     rainbow (3.1.1)
     rake (13.1.0)
-    regexp_parser (2.8.3)
+    regexp_parser (2.9.0)
     rexml (3.2.6)
-    rubocop (1.59.0)
+    rubocop (1.60.0)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
-      parser (>= 3.2.2.4)
+      parser (>= 3.3.0.2)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
@@ -82,7 +82,7 @@ PLATFORMS
 DEPENDENCIES
   minitest (~> 5.21)
   rake (~> 13.1)
-  rubocop (~> 1.59)
+  rubocop (~> 1.60)
   type_fusion!
 
 BUNDLED WITH
