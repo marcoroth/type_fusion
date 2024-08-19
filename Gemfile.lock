@@ -41,7 +41,7 @@ GEM
     local_uri (1.2.0)
       activesupport
       rack
-    minitest (5.25.0)
+    minitest (5.25.1)
     parallel (1.25.1)
     parser (3.3.4.0)
       ast (~> 2.4.1)
